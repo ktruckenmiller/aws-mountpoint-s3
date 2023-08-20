@@ -17,8 +17,9 @@ jobs:
         with:
           aws-region: us-west-2
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/aws-mountpoint-s3-gha
-      - uses: docker/setup-qemu-action@v2
       - uses: aws-actions/amazon-ecr-login@v1
+      - uses: docker/setup-qemu-action@v2
+      - uses: docker/setup-buildx-action@v2
       - name: Build and push and cache from registry
         uses: docker/build-push-action@v4
         with:
