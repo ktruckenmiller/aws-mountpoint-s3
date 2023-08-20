@@ -18,13 +18,16 @@ jobs:
           aws-region: us-west-2
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/aws-mountpoint-s3-gha
       - uses: aws-actions/amazon-ecr-login@v1
+        with:
+          mask-password: 'true'
+          registry-type: public
       - uses: docker/setup-qemu-action@v2
       - uses: docker/setup-buildx-action@v2
       - name: Build and push and cache from registry
         uses: docker/build-push-action@v4
         with:
           push: true
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           tags: public.ecr.aws/w5r1s7c4/aws-mountpoint-s3:latest
           cache-from: type=registry,ref=public.ecr.aws/w5r1s7c4/aws-mountpoint-s3:latest
           cache-to: type=registry,ref=public.ecr.aws/w5r1s7c4/aws-mountpoint-s3:latest,mode=max
