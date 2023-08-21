@@ -26,7 +26,6 @@ RUN dnf upgrade -y && \
     rm mount-s3.rpm
 
 RUN echo "user_allow_other" >> /etc/fuse.conf
-ARG bucket_name
-RUN mkdir -p /$bucket_name
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 # Run in foreground mode so that the container can be detached without exiting Mountpoint
-ENTRYPOINT [ "mount-s3", "-f" ]
+ENTRYPOINT [ "entrypoint.sh" ]

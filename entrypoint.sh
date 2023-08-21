@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/sh -ex
 
-mkdir -p /mnt/$S3_MOUNTPOINT
-mount-s3 --allow-delete $S3_BUCKET $S3_MOUNTPOINT
+mkdir -p ${S3_MOUNTPOINT}
+mount-s3 -f --allow-delete ${S3_BUCKET} ${S3_MOUNTPOINT}
