@@ -24,7 +24,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          platforms: linux/amd64
+          platforms: linux/amd64,linux/arm64
           tags: ktruckenmiller/aws-mountpoint-s3:latest
           cache-from: type=registry,ref=ktruckenmiller/aws-mountpoint-s3:buildcache
           cache-to: type=registry,ref=ktruckenmiller/aws-mountpoint-s3:buildcache,mode=max
